@@ -1,7 +1,11 @@
 FROM odoo:18
 
-# Copie le template à un endroit persistant
+# Installe envsubst (gettext-base)
+RUN apt-get update && apt-get install -y --no-install-recommends gettext-base \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copie le template dans une zone persistante
 COPY odoo.conf.template /etc/odoo/odoo.conf.template
 
-# Génère le vrai odoo.conf à partir des variables Render puis démarre Odoo
+# Génère la conf à partir des variables Render puis lance Odoo
 CMD bash -c "envsubst < /etc/odoo/odoo.conf.template > /etc/odoo/odoo.conf && exec odoo"
