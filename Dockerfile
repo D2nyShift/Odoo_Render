@@ -1,5 +1,5 @@
 FROM odoo:18
 
-COPY entrypoint.sh /usr/bin/entrypoint.sh
+COPY entrypoint.sh /entrypoint.sh
 
-CMD /usr/bin/entrypoint.sh
+CMD ["bash", "/entrypoint.sh"]
