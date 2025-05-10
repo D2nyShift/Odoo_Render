@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: odoo-web
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+    envVars:
+      - key: PGHOST
+        value: ep-long-scene-a2bjs08m-pooler.eu-central-1.aws.neon.tech
+      - key: PGPORT
+        value: "5432"
+      - key: PGUSER
+        value: neondb_owner
+      - key: PGPASSWORD
+        sync: false
+      - key: PGDATABASE
+        value: neondb
+    disk:
+      name: odoo-data
+      mountPath: /var/lib/odoo
+      sizeGB: 1
