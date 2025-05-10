@@ -1,5 +1,7 @@
 FROM odoo:18
 
-COPY odoo.conf.template /tmp/odoo.conf.template
+# Copie le template à un endroit persistant
+COPY odoo.conf.template /etc/odoo/odoo.conf.template
 
-CMD bash -c "envsubst < /tmp/odoo.conf.template > /etc/odoo/odoo.conf && odoo"
+# Génère le vrai odoo.conf à partir des variables Render puis démarre Odoo
+CMD bash -c "envsubst < /etc/odoo/odoo.conf.template > /etc/odoo/odoo.conf && exec odoo"
