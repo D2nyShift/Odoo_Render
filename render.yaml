@@ -5,17 +5,18 @@ services:
     plan: free
     dockerfilePath: ./Dockerfile
     autoDeploy: true
+    startCommand: >
+      odoo --db_host=$DB_HOST --db_port=$DB_PORT
+           --db_user=$DB_USER --db_password=$DB_PASSWORD
     envVars:
-      - key: PGHOST
+      - key: DB_HOST
         value: ep-long-scene-a2bjs08m-pooler.eu-central-1.aws.neon.tech
-      - key: PGPORT
+      - key: DB_PORT
         value: "5432"
-      - key: PGUSER
+      - key: DB_USER
         value: neondb_owner
-      - key: PGPASSWORD
+      - key: DB_PASSWORD
         sync: false
-      - key: PGDATABASE
-        value: neondb
     disk:
       name: odoo-data
       mountPath: /var/lib/odoo
